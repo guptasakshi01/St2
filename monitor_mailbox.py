@@ -81,6 +81,9 @@ class MonitorMailbox(PollingSensor):
         This method polls mailbox every one second
         '''
         self._logger.debug('[Entering Poll Mailbox]')
+        '''
+        Monitors unread mails containg subject test
+        '''
         for item in self.account.inbox.filter(subject__contains='test', is_read=False):
             item.is_read = True
             item.save()
