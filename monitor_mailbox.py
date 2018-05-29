@@ -33,7 +33,7 @@ class MonitorMailbox(PollingSensor):
         self._logger = self._sensor_service.get_logger(__name__)
         client = Client(base_url='http://localhost')
         exchangeuser = client.keys.get_by_name(name="exchangeusername").value
-        exchangepassword = client.keys.get_by_name(name="exchangepassword").value
+        exchangepassword = client.keys.get_by_name(name="exchangepassword", decrypt=True).value
         credentials = Credentials(username=exchangeuser, password=exchangepassword)
         config = Configuration(server='Outlook.Office365.com', credentials=credentials)
         self.account = Account(primary_smtp_address=exchangeuser, credentials=credentials, autodiscover=False, config=config, access_type=DELEGATE)
